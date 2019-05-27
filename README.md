@@ -1,4 +1,4 @@
-# vimrc_xuyangcao
+# vimrc
 Hi everyone! This is my vimrc configration file used for vim editor.
 
 1. the .vimrc shows my vimrc configuration
