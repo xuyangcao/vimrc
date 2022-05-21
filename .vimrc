@@ -25,19 +25,7 @@ set nocompatible        " Use Vim settings, rather then Vi settings
 set wildmenu            " vim自身命令行模式智能补全
 set ttimeout            " 设置ESC生效时间
 set ttimeoutlen=100     " 设置ESC生效时间
-syntax on               " 自动语法高亮 
 syntax enable           " 开启语义分析
-
-filetype on             " 开启文件类型侦测
-filetype plugin on      " 根据侦测到的不同类型加载对应的插件
-filetype indent on      " 根据侦测到的不同类型采用不同的缩进格式
-
-" 括号匹配
-inoremap ( ()<ESC>i
-inoremap [ []<ESC>i
-inoremap ' ''<ESC>i
-inoremap " ""<ESC>i
-autocmd FileType cpp,java inoremap {} {<CR>}<ESC>kA<CR>
 
 " 浅色高亮当前行
 autocmd InsertEnter * se cul            
@@ -54,7 +42,9 @@ if has("autocmd")
 \ endif
 endif
 
-map <Leader>y "+y     " 粘贴到系统剪切板
+" 剪贴板复制粘贴,需安装vim-gtk
+map <Leader>y "+y
+map <Leader>p "+p
 
 " 编译快捷键
 autocmd filetype python nnoremap <F5> :w <bar> exec '!python '.shellescape('%')<CR>
@@ -115,7 +105,7 @@ let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 
 "========== ctags & taglist ==========
 nmap<leader>tg :!ctags -R --fields=+aS --extra=+q<CR>
-nnoremap  <leader>t  :TlistToggle <CR> 
+nnoremap  <C-t>  :TlistToggle <CR> 
 nnoremap  <Leader>u  :TlistUpdate <CR> 
 let Tlist_Inc_Winwidth=0            "禁止自动改变当前Vim窗口的大小
 let Tlist_Use_Right_Window=1        "把方法列表放在屏幕的右侧
