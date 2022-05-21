@@ -1,17 +1,19 @@
 https://github.com/Valloric/YouCompleteMe
 https://github.com/SirVer/ultisnips.git
-https://github.com/honza/vim-snippets.git
-https://github.com/Shougo/neocomplete.vim
-https://github.com/jiangmiao/auto-pairs
 https://github.com/scrooloose/nerdtree
-
-https://github.com/xuhdev/vim-latex-live-preview
+https://github.com/Shougo/neocomplete.vim
 
 https://github.com/airblade/vim-gitgutter
-https://github.com/mhinz/vim-signify
 https://github.com/tpope/vim-fugitive
+
+https://github.com/Yggdroot/indentLine
+https://github.com/tpope/vim-commentary.git
+
+https://github.com/vim-scripts/taglist.vim.git
+https://github.com/vim-scripts/a.vim.git
 
 https://github.com/vim-airline/vim-airline
 https://github.com/vim-airline/vim-airline-themes
-https://github.com/Yggdroot/indentLine
 https://github.com/flazz/vim-colorschemes  
+
+https://github.com/iamcco/markdown-preview.nvim.git
