@@ -25,6 +25,7 @@ set nocompatible        " Use Vim settings, rather then Vi settings
 set wildmenu            " vim自身命令行模式智能补全
 set ttimeout            " 设置ESC生效时间
 set ttimeoutlen=100     " 设置ESC生效时间
+set autowrite           " 自动写入
 syntax enable           " 开启语义分析
 
 " 浅色高亮当前行
@@ -97,7 +98,7 @@ let NERDTreeWinPos="left"
 let NERDTreeIgnore=['\.vim$', '\~$', '\.o$', '\.d$', '\.a$', '\.out$', '\.tgz$']
 
 "============= ultisnips ============
-""Trigger configuration. Do not use <tab> if you use
+"Trigger configuration. Do not use <tab> if you use
 "https://github.com/Valloric/YouCompleteMe.
 let g:UltiSnipsExpandTrigger="<c-o>"
 let g:UltiSnipsJumpForwardTrigger="<c-j>"
@@ -105,11 +106,11 @@ let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 
 "========== ctags & taglist ==========
 nmap<leader>tg :!ctags -R --fields=+aS --extra=+q<CR>
-nnoremap  <C-t>  :TlistToggle <CR> 
-nnoremap  <Leader>u  :TlistUpdate <CR> 
+nnoremap  <leader>t  :TlistToggle <CR> 
 let Tlist_Inc_Winwidth=0            "禁止自动改变当前Vim窗口的大小
 let Tlist_Use_Right_Window=1        "把方法列表放在屏幕的右侧
 let Tlist_File_Fold_Auto_Close=1    "让当前不被编辑的文件的方法列表自动折叠起来
+let g:tlist_markdown_settings = 'markdown;h:Headlins'
 
 "============ colorscheme ============
 colorscheme molokai
@@ -123,3 +124,10 @@ nmap <Leader>a :A<CR>         " 快速切换C H源文件(a.vim)
 "========= Markdown Preview ========== 
 nmap <F8> <Plug>MarkdownPreview
 nmap <F9> <Plug>MarkdownPreviewStop
+
+"=========== vim markdown ============ 
+let g:vim_markdown_toc_autofit = 1
+let g:vim_markdown_conceal = 0
+
+"========= vim markdown toc ========== 
+nmap toc :GenTocMarked<CR>
