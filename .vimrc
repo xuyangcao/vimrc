@@ -58,7 +58,7 @@ autocmd filetype java nnoremap <F2> :w <bar> exec '!java -cp ./bin '.shellescape
 "新建.c,.h,.sh,.Java, .python文件，自动插入文件头
 autocmd BufNewFile *.py,*.cpp,*.cc,*.[ch],*.sh,*.Java,*.go exec ":call SetTitle()"
 func SetTitle()
-    if &filetype == 'sh' || &filetype == 'python'
+    if &filetype == 'sh'
         call setline(1,"\#########################################################################")
         call append(line("."),   "\# File Name:    ".expand("%"))
         call append(line(".")+1, "\# Author:       xuyangcao")
@@ -121,13 +121,22 @@ let g:airline_theme='molokai'
 "================= A =================
 nmap <Leader>a :A<CR>         " 快速切换C H源文件(a.vim)
 
-"========= Markdown Preview ========== 
+
+"============= Markdown ============== 
+"Markdown Preview
 nmap <F8> <Plug>MarkdownPreview
 nmap <F9> <Plug>MarkdownPreviewStop
-
-"=========== vim markdown ============ 
+"vim markdown
 let g:vim_markdown_toc_autofit = 1
 let g:vim_markdown_conceal = 0
-
-"========= vim markdown toc ========== 
+let g:vim_markdown_new_list_item_indent = 0
+"vim markdown toc
 nmap toc :GenTocMarked<CR>
+" picture
+nmap pic :call SetPic()<CR>
+func SetPic()
+    call append(line("."), "\<div class=\"fig figcenter\"\>")
+    call append(line(".")+1, "\t\<img src=\"{{ site.baseurl }}/assets/*.png\" width=600px\>")
+    call append(line(".")+2, "\t\<div class=\"figcaption\"\>xxx\</div\>")
+    call append(line(".")+3, "\</div\>")
+endfunc
