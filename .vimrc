@@ -78,8 +78,7 @@ nmap <c-e> :UltiSnipsEdit<CR>
 "vim-snippets
 let g:snips_author = "xuyangcao"
 let g:snips_email = "caoxuyang@bjtu.edu.cn"
-let g:snips_github = "https://github.com/xuyangcao"
-let g:snips_website = "https://xuyangcao.github.io"
+let g:snips_github = "https://xuyangcao.github.io"
 
 "========== ctags & taglist ==========
 nmap<leader>tg :!ctags -R --fields=+aS --extra=+q<CR>
@@ -100,7 +99,7 @@ nmap <Leader>a :A<CR>
 
 "============= Markdown ============== 
 "Markdown Preview
-nmap <F8> :MarkdownPreview<CR>
+nmap <F5> :MarkdownPreview<CR>
 "vim markdown
 let g:vim_markdown_toc_autofit = 1
 let g:vim_markdown_conceal = 0

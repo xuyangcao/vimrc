@@ -67,7 +67,7 @@ snippet *** "bold italics"
 endsnippet
 
 # footnote
-snippet foot "Footnote"
+snippet ftn "Footnote" A
 [^${1:${VISUAL:Footnote}}]$0
 
 [^$1]:${2:Text}
@@ -80,7 +80,7 @@ snippet "tb([1-9][1-9])" "Fancy table" br
 endsnippet
 
 # figure for my blog
-snippet fig "html figure"
+snippet fig "html figure" b
 <div class="fig figcenter">
     <img src="{{ site.baseurl }}/asssets/$1" width=${2:600}px>
     <div class="figcaption">${3:description}</div>
