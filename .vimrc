@@ -55,61 +55,38 @@ autocmd filetype dot nnoremap <F5> :w <bar> exec '!dot -Tsvg sqlparse.dot > sqlp
 autocmd Filetype java nnoremap <F5> :w <bar> exec '!javac '.shellescape('%'). ' -d ./bin'<CR>
 autocmd filetype java nnoremap <F2> :w <bar> exec '!java -cp ./bin '.shellescape('%:r')<CR>
 
-"新建.c,.h,.sh,.Java, .python文件，自动插入文件头
-autocmd BufNewFile *.py,*.cpp,*.cc,*.[ch],*.sh,*.Java,*.go exec ":call SetTitle()"
-func SetTitle()
-    if &filetype == 'sh'
-        call setline(1,"\#########################################################################")
-        call append(line("."),   "\# File Name:    ".expand("%"))
-        call append(line(".")+1, "\# Author:       xuyangcao")
-        call append(line(".")+2, "\# Mail:         caoxuyang@bjtu.edu.cn")
-        call append(line(".")+3, "\# Created Time: ".strftime("%c"))
-        call append(line(".")+4, "\#########################################################################")
-        call append(line(".")+5, "\#!/bin/bash")
-        call append(line(".")+6, "")
-    else
-        call setline(1, "/*************************************************************************")
-        call append(line("."),   "> File Name:     ".expand("%"))
-        call append(line(".")+1, "> Author:        xuyangcao")
-        call append(line(".")+2, "> Mail:          caoxuyang@bjtu.edu.cn")
-        call append(line(".")+3, "> Created Time:  ".strftime("%c"))
-        call append(line(".")+4, "> Description:   ")
-        call append(line(".")+5, " ************************************************************************/")
-        call append(line(".")+6, "")
-    endif
-endfunc
-autocmd BufNewFile * normal G     "新建文件后，自动定位到文件末尾
-
-
 "=============== YCM ================
 let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/.ycm_extra_conf.py'
 nnoremap <F12> :YcmCompleter GoToDefinitionElseDeclaration<CR>
 
 "============== nerdtree ============
 autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | endif "当没指定文件时nerdtree自动打开
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif "当只剩下nerdtree时候vim自动退出
+autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | endif
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 map <C-n> :NERDTreeToggle<CR> 
-" 使用NERDTree插件查看工程文件。设置快捷键
-nnoremap <silent> <Leader>n  :NERDTreeToggle <CR> 
-" 设置NERDTree子窗口位置
 let NERDTreeWinPos="left"
-" 设置忽略的文件
 let NERDTreeIgnore=['\.vim$', '\~$', '\.o$', '\.d$', '\.a$', '\.out$', '\.tgz$']
 
-"============= ultisnips ============
-"Trigger configuration. Do not use <tab> if you use
-"https://github.com/Valloric/YouCompleteMe.
+"====== ultisnips & vim-snippets =====
+"ultisnips
+let g:UltiSnipsSnippetDirectories=[$HOME.'/.vim/ultisnips']
 let g:UltiSnipsExpandTrigger="<c-o>"
 let g:UltiSnipsJumpForwardTrigger="<c-j>"
 let g:UltiSnipsJumpBackwardTrigger="<c-k>"
+let g:UltiSnipsEditSplit="vertical" 
+nmap <c-e> :UltiSnipsEdit<CR>
+"vim-snippets
+let g:snips_author = "xuyangcao"
+let g:snips_email = "caoxuyang@bjtu.edu.cn"
+let g:snips_github = "https://github.com/xuyangcao"
+let g:snips_website = "https://xuyangcao.github.io"
 
 "========== ctags & taglist ==========
 nmap<leader>tg :!ctags -R --fields=+aS --extra=+q<CR>
 nnoremap  <leader>t  :TlistToggle <CR> 
-let Tlist_Inc_Winwidth=0            "禁止自动改变当前Vim窗口的大小
-let Tlist_Use_Right_Window=1        "把方法列表放在屏幕的右侧
-let Tlist_File_Fold_Auto_Close=1    "让当前不被编辑的文件的方法列表自动折叠起来
+let Tlist_Inc_Winwidth=0
+let Tlist_Use_Right_Window=1
+let Tlist_File_Fold_Auto_Close=1
 let g:tlist_markdown_settings = 'markdown;h:Headlins'
 
 "============ colorscheme ============
@@ -119,24 +96,14 @@ colorscheme molokai
 let g:airline_theme='molokai'
 
 "================= A =================
-nmap <Leader>a :A<CR>         " 快速切换C H源文件(a.vim)
-
+nmap <Leader>a :A<CR>
 
 "============= Markdown ============== 
 "Markdown Preview
-nmap <F8> <Plug>MarkdownPreview
-nmap <F9> <Plug>MarkdownPreviewStop
+nmap <F8> :MarkdownPreview<CR>
 "vim markdown
 let g:vim_markdown_toc_autofit = 1
 let g:vim_markdown_conceal = 0
 let g:vim_markdown_new_list_item_indent = 0
 "vim markdown toc
 nmap toc :GenTocMarked<CR>
-" picture
-nmap pic :call SetPic()<CR>
-func SetPic()
-    call append(line("."), "\<div class=\"fig figcenter\"\>")
-    call append(line(".")+1, "\t\<img src=\"{{ site.baseurl }}/assets/*.png\" width=600px\>")
-    call append(line(".")+2, "\t\<div class=\"figcaption\"\>xxx\</div\>")
-    call append(line(".")+3, "\</div\>")
-endfunc
