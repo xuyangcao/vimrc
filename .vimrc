@@ -4,38 +4,38 @@ syntax on
 filetype plugin indent on
 
 "=========== basic config ==========
-set number              " 显示行号
-set ruler               " 打开状态栏标尺
-set shiftwidth=4        " 默认缩进4个空格 
-set softtabstop=4       " 使用tab时 tab空格数 
-set tabstop=4           " tab 代表4个空格  
-set expandtab           " 使用空格替换tab
-set hlsearch            " 高亮显示搜索结果
-set t_Co=256            " 颜色
-set showmatch           " 括号匹配
-set foldmethod=indent   " 代码折叠
-set foldlevel=99        " 代码折叠
-set nofen               " 启动vim时打开所有折叠代码。
-set history=50	        " keep 50 lines of command line history
-set showcmd		        " display incomplete commands
-set incsearch	        " do incremental searching
-set noswapfile          " 不产生.swp文件
+set encoding=utf-8      " encoding
+set number              " show line number
+set ruler               " Show the line and column number of the cursor position
+set shiftwidth=4        " Number of spaces to use for each step of (auto)indent
+set softtabstop=4       " Number of spaces that a <Tab> counts for whild editing
+set tabstop=4           " Number of spaces that a <Tab> in the file counts for
+set expandtab           " In Insert mode: Use the appropriate number of spaces to insert a <Tab>
+set hlsearch            " Last search pattern highlighting
+set showmatch           " When a bracket is inserted, briefly jump to the matching one
+set foldmethod=indent   " The kind of folding used for the current window
+set foldlevel=99        " Sets the fold level
+set nofen               " All folds are open
+set history=50	        " Keep 50 lines of command line history
+set showcmd             " Display incomplete commands
+set incsearch	        " Do incremental searching
+set noswapfile          " Open a new buffer without creating a swap file for it
 set modeline            " set modeline
 set nocompatible        " Use Vim settings, rather then Vi settings
-set wildmenu            " vim自身命令行模式智能补全
-set ttimeout            " 设置ESC生效时间
-set ttimeoutlen=100     " 设置ESC生效时间
-set autowrite           " 自动写入
-syntax enable           " 开启语义分析
+set wildmenu            " Command-line completion operates in an enhanced mode
+set ttimeout            " Timeout on key codes
+set ttimeoutlen=100     " The time in milliseconds that is waited for a key code or mapped key sequence to complete
+set autowrite           " Write the contents of the file, if it has been modified
+syntax enable           " Enable syntax
 
-" 浅色高亮当前行
+" Highlight current line
 autocmd InsertEnter * se cul            
-" 注释针对不同语言的注释方法
+" Comments according to different lauguages
 autocmd FileType cpp set commentstring=//\ %s
 autocmd FileType php set commentstring=//\ %s
 autocmd FileType python set commentstring=#\ %s
 
-" 重新打开文档时光标回到文档关闭前的位置
+" When the document is reopened, the cursor returns to the position before the document was closed
 if has("autocmd")
  autocmd BufReadPost *
  \ if line("'\"") > 0 && line ("'\"") <= line("$") |
@@ -43,11 +43,11 @@ if has("autocmd")
 \ endif
 endif
 
-" 剪贴板复制粘贴,需安装vim-gtk
+" Copy & paste using the true clipboard, vim-gtk required
 map <Leader>y "+y
 map <Leader>p "+p
 
-" 编译快捷键
+" Compile shortcuts
 autocmd filetype python nnoremap <F5> :w <bar> exec '!python '.shellescape('%')<CR>
 autocmd filetype cpp nnoremap <F5> :w <bar> exec '!g++ --std=c++11 -pthread '.shellescape('%').' -o ./bin/'.shellescape('%:r').' && ./bin/'.shellescape('%:r')<CR>
 autocmd filetype cc nnoremap <F5> :w <bar> exec '!g++ --std=c++11 -pthread '.shellescape('%').' -o ./bin/'.shellescape('%:r').' && ./bin/'.shellescape('%:r')<CR>
@@ -58,6 +58,9 @@ autocmd filetype java nnoremap <F2> :w <bar> exec '!java -cp ./bin '.shellescape
 "=============== YCM ================
 let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/.ycm_extra_conf.py'
 nnoremap <F12> :YcmCompleter GoToDefinitionElseDeclaration<CR>
+nmap <leader>yfw <Plug>(YCMFindSymbolInWorkspace)
+nmap <leader>yfd <Plug>(YCMFindSymbolInDocument)
+let g:ycm_collect_identifiers_from_tags_files = 1
 
 "============== nerdtree ============
 autocmd StdinReadPre * let s:std_in=1
@@ -80,8 +83,11 @@ let g:snips_author = "xuyangcao"
 let g:snips_email = "caoxuyang@bjtu.edu.cn"
 let g:snips_github = "https://xuyangcao.github.io"
 
-"========== ctags & taglist ==========
-nmap<leader>tg :!ctags -R --fields=+aS --extra=+q<CR>
+"================ tags ===============
+set tags=tags
+set tags+=~/.vim/tagfiles/opencv.tags
+
+"============== taglist ==============
 nnoremap  <leader>t  :TlistToggle <CR> 
 let Tlist_Inc_Winwidth=0
 let Tlist_Use_Right_Window=1
@@ -93,9 +99,6 @@ colorscheme molokai
 
 "========== airlinae theme =========== 
 let g:airline_theme='molokai'
-
-"================= A =================
-nmap <Leader>a :A<CR>
 
 "============= Markdown ============== 
 "Markdown Preview
